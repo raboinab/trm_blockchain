@@ -19,7 +19,7 @@ provider "docker" {}
 provider "aws" {
   region = "us-east-1" #The region where the environment 
   #is going to be deployed # Use your own region here
-  access_key = "AKIAT3M3VHY5CNG4Z4QI"                     # Enter AWS IAM 
-  secret_key = "UvbY2vGYXfvYt5I4w0j4qlpFQKUX69SwKEkrseJD" # Enter AWS IAM 
+  access_key = ""                     # Enter AWS IAM 
+  secret_key = "" # Enter AWS IAM 
 }
 

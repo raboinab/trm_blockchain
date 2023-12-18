@@ -20,31 +20,14 @@ Which would be:
 - Install an upt-to-date version of [Terraform](http://terraform.io) on your computer
 - Install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) on your machine
 - Buy and setup a top level domain in your AWS account that you can use for this demonstration (This step will incur costs for you!)
-- Make sure you have a Route 53 Hosted Zone for this top level domain and note down the Hosted Zone ID
 - You will need an SSH public and private key 
-- Make sure you have `make` installed
-- Make sure you have the `openssl` package installed (used for random hash generation)
+
 
 ## Getting started
 
 All commands are available via Makefile. Before you start, you need to add some definitions to the config file.
 Generate the config file:
 
-`make bootstrap`
-
-Now set the appropriate values for the config variables:
-- Set `DOMAIN_NAME` to your top level domain (TLD) at AWS, plus a subdomain you want to usee for this tutorial (for example `service.example.com`)
-- Set `TLD_ZONE_ID` to the Route 53 Hosted Zone ID of your top level domain
-- Set `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` with credentials with permissions to create resources in AWS
-- Set `TF_VAR_public_ec2_key` with the public key of your SSH key (you must own the private key to be able to login to the EC2 instances)
-
-- Optional: set `REGION` to use a different region (default is `eu-central-1`)
-
-After adding these variables, you are ready to start:
-
-```shell
-make deploy
-```
 
 This command will execute the following tasks:
 
@@ -72,51 +55,6 @@ call `http://dev.service.example.com`, you are still being redirected to `https:
 
 ## Trigger new deployment
 
-This demo project shows a simple React/NextJS service that serves as an example for a more complex service that can be 
-integrated and deployed regularly within a CI/CD environment, including the underlying infrastructure. Each deployment 
-(aka each new ECS Task version) is deployed using a rolling update approach, which means there is no downtime. 
-
-To simulate triggering a new deployment, make some changes in the NextJS app (go to _app/src/pages/index.tsx_ and change the `<h1>` headline text) 
-and run `make deploy` again. The following steps happen now:
-
-- Potential changes in the infrastructure are provisioned
-- A new task version is deployed with a different hash version number than the previous one
-- The application Docker image is being build and pushed to the Elastic Container Registry (ECR)
-- The existing task version will be replaced task by task
-
-In your AWS console, you can observe the deployment process in the ECS console. The process takes some minutes to finish.
-
-## Destroy all resources
-
-To destroy all your resources, run the following command:
-```shell
-make destroy
-```
-This command takes some time (usually 5-10 minutes) to finish.
-
-## FAQ
-
-### `aws_ecs_service.service` hanging in status 'DRAINING'
-
-Before an ECS Service can be deleted, all running tasks have to be stopped and the task definitions have to be deregistered. 
-After that, the service can be deleted _without_ being in the 'DRAINING' status. The `make destroy` command normally takes 
-care of all required steps to prevent this situation from happening. However, if you encounter problems, you can run `make destroy.clean` 
-to run the required steps again. 
-
-### The service DNS settings do not work
-
-Make sure that you have bought a domain name at AWS with the correct nameserver (NS) settings. You have to use the 
-Route 53 Hosted Zone ID in the Makefile for `TF_VAR_tld_zone_id`. 
-
-Double-check in the AWS Console in Route 53 for you domain name that an NS record exists that looks something like this:
-
-![Route 53 DNS](docs/dns.png)
-
-If your domain is `example.com`, the record name must be `service.example.com`.  
-
-> **Info**
-> 
-> The domain names on the right might look different for your setup, which is okay.
 
 ## Known limitations
 

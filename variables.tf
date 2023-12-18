@@ -36,14 +36,14 @@ variable "environment" {
 variable "aws_access_key_id" {
   description = "AWS console access key"
   type        = string
-  default     = "AKIAT3M3VHY5CNG4Z4QI"
+  default     = ""
 }
 
 
 variable "aws_secret_access_key" {
   description = "AWS console secret access key"
   type        = string
-  default     = "UvbY2vGYXfvYt5I4w0j4qlpFQKUX69SwKEkrseJD"
+  default     = ""
 }
 
 variable "region" {
@@ -59,7 +59,7 @@ variable "region" {
 variable "tld_zone_id" {
   description = "Top level domain hosted zone ID"
   type        = string
-  default     = "Z07744211BC5ZYZDV1PLG"
+  default     = ""
 }
 
 variable "vpc_cidr_block" {
@@ -81,7 +81,7 @@ variable "az_count" {
 variable "public_ec2_key" {
   description = "Public key for SSH access to EC2 instances"
   type        = string
-  default     = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCqtERuSb51GpUBU7hddbASq/dUGfbd8+Q4QCTYXIIG/+wZ5OoIFawp6WfPy2ZtLMYa1LZKN8PybGr3KFbpZIMC6D9wZ9rTIirTCuxvhEkUJvItK5NfvMJPgddSQvctSroVVJykJBaJ3uUta14kSUDmr8x7DsJ2QMD0TewDhBZejJIAmcExk/Pj5WSXr9AabeO/KCtTrlsxw0UBspMVLpl7SWt8KbpgnACMzqaH3MHCEcpP6YeAER9G/zTM0oN9jOUZhOhw1woo7SfNbe4+ZGA63fg+WwomPj7FIBvkqkLYKQG41GoHPAtIlEe0xQTfgzR4ZbJVOlZa1rbTGlxIxZWZ"
+  default     = ""
 }
 
 variable "instance_type" {
